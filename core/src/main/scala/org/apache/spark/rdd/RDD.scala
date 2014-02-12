@@ -440,6 +440,12 @@ abstract class RDD[T: ClassTag](
    * elements (a, b) where a is in `this` and b is in `other`.
    */
   def cartesian[U: ClassTag](other: RDD[U]): RDD[(T, U)] = new CartesianRDD(sc, this, other)
+  
+    /**
+   * Return the unique self Cartesian product of this RDD, that is, the RDD of all unique pairs of
+   * elements (a, b) where a is in `this` and b is in `this`.
+   */
+  def selfCartesian[U: ClassManifest](): RDD[(T,T)] = new CartesianRDD2(sc, this,this)
 
   /**
    * Return an RDD of grouped items.

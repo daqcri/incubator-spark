@@ -196,6 +196,13 @@ trait JavaRDDLike[T, This <: JavaRDDLike[T, This]] extends Serializable {
    */
   def cartesian[U](other: JavaRDDLike[U, _]): JavaPairRDD[T, U] =
     JavaPairRDD.fromRDD(rdd.cartesian(other.rdd)(other.classTag))(classTag, other.classTag)
+    
+  /**
+   * Return the unique self Cartesian product of this RDD, that is, the RDD of all unique pairs of
+   * elements (a, b) where a is in `this` and b is in `this`.
+   */
+  def selfCartesian[U](): JavaPairRDD[T, T] =
+    JavaPairRDD.fromRDD(rdd.selfCartesian())(classManifest,classManifest)
 
   /**
    * Return an RDD of grouped elements. Each group consists of a key and a sequence of elements
