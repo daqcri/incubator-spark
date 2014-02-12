@@ -20,7 +20,7 @@ package org.apache.spark.rdd
 import java.io.{ ObjectOutputStream, IOException }
 import org.apache.spark._
 
-private[spark] class CartesianRDD2[T: ClassManifest](
+private[spark] class CartesianRDD2[T: ClassTag](
   sc: SparkContext,
   var rdd1: RDD[T],
   var rdd2: RDD[T])

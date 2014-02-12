@@ -202,7 +202,7 @@ trait JavaRDDLike[T, This <: JavaRDDLike[T, This]] extends Serializable {
    * elements (a, b) where a is in `this` and b is in `this`.
    */
   def selfCartesian[U](): JavaPairRDD[T, T] =
-    JavaPairRDD.fromRDD(rdd.selfCartesian())(classManifest,classManifest)
+    JavaPairRDD.fromRDD(rdd.selfCartesian())(classTag,classTag)
 
   /**
    * Return an RDD of grouped elements. Each group consists of a key and a sequence of elements
