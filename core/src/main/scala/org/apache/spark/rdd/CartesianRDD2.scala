@@ -31,14 +31,7 @@ private[spark] class CartesianRDD2[T: ClassTag](
   val numPartitionsInRdd2 = rdd2.partitions.size
 
   override def getPartitions: Array[Partition] = {
-    // create the cross product split
-    println("Hi from Spark, I am the new CartesianRDD2!!");
-    if(rdd1.partitions.size != rdd2.partitions.size){
-     System.err.println("rdd1 should be as big as rdd2");
-     System.exit(-1);
-    }
     val array = new Array[Partition]((rdd1.partitions.size * (rdd2.partitions.size+1))/2)
-    System.out.println(array.size);
     var idx : Int = 0;
     for (s1 <- rdd1.partitions) {
       for (s2 <- rdd2.partitions) {
